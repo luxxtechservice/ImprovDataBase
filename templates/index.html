@@ -2,22 +2,77 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Interface</title>
+    <title>Record Management</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #333; }
+        form { margin-bottom: 20px; }
+        input[type='text'], input[type='number'] { padding: 10px; margin: 5px; width: 200px; }
+        button { padding: 10px 15px; background-color: #28a745; color: white; border: none; cursor: pointer; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+        th { background-color: #f8f9fa; }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Welcome to the Improv Data Base</h1>
-    </header>
-    <main>
-        <section>
-            <h2>Your data will appear here.</h2>
-            <p>This is a placeholder for the web interface.</p>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2026 Improv Data Base</p>
-    </footer>
+    <h1>Record Management</h1>
+    <form id="add-record-form">
+        <input type="text" id="record-name" placeholder="Record Name" required />
+        <input type="number" id="record-value" placeholder="Record Value" required />
+        <button type="submit">Add Record</button>
+    </form>
+
+    <form id="search-form">
+        <input type="text" id="search-input" placeholder="Search Records" />
+        <button type="submit">Search</button>
+    </form>
+
+    <table id="records-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Record entries will be injected here dynamically -->
+        </tbody>
+    </table>
+
+    <script>
+        document.getElementById('add-record-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const name = document.getElementById('record-name').value;
+            const value = document.getElementById('record-value').value;
+            addRecord(name, value);
+        });
+
+        function addRecord(name, value) {
+            const tableBody = document.getElementById('records-table').getElementsByTagName('tbody')[0];
+            const newRow = tableBody.insertRow();
+            const newCellId = newRow.insertCell(0);
+            const newCellName = newRow.insertCell(1);
+            const newCellValue = newRow.insertCell(2);
+            newCellId.textContent = tableBody.rows.length;
+            newCellName.textContent = name;
+            newCellValue.textContent = value;
+        }
+
+        document.getElementById('search-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            searchRecords(searchTerm);
+        });
+
+        function searchRecords(term) {
+            const tableBody = document.getElementById('records-table').getElementsByTagName('tbody')[0];
+            Array.from(tableBody.rows).forEach(row => {
+                const name = row.cells[1].textContent.toLowerCase();
+                row.style.display = name.includes(term) ? '' : 'none';
+            });
+        }
+    </script>
 </body>
 </html>
