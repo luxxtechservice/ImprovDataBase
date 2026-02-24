@@ -1,12 +1,6 @@
-# Requirements
-
-# Database library (e.g., SQLAlchemy)
-SQLAlchemy
-
-# Web framework (e.g., Flask)
-Flask
-
-# Other necessary libraries
-requests
-numpy
-pandas
+Flask==2.3.0
+Werkzeug==2.3.0
+SQLAlchemy==2.0.0
+requests==2.31.0
+numpy==1.24.0
+pandas==2.0.0
