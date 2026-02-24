@@ -1,0 +1,12 @@
+# Requirements
+
+# Database library (e.g., SQLAlchemy)
+SQLAlchemy
+
+# Web framework (e.g., Flask)
+Flask
+
+# Other necessary libraries
+requests
+numpy
+pandas
